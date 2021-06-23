@@ -1,0 +1,29 @@
+
+
+.add-favorite, .remove-favorite {
+    width: 100%;
+    border-radius: 5px;
+    height: 35px;
+    font-size: 16px;
+    position: relative;
+    top: -10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 25px 24px 2px rgba(0,0,0,0.45);
+
+}
+
+.add-favorite, .remove-favorite:focus {
+    outline: none;
+}
+
+.remove-favorite {
+
+    background-color: #c71a1a;
+}
+
+.add-favorite {
+    background-color: #47C0C5;
+}
