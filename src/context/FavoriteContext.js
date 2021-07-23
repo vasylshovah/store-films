@@ -13,6 +13,7 @@ export const useFavoriteContent = () => {
 export const FavoriteProvider = ({children}) => {
     const dispatch = useDispatch();
 
+
     const addToFavorite = (value) => {
 
         if (!value) {
