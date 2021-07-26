@@ -9,12 +9,6 @@ import {
     SESSION_ID_URL
 } from './config';
 
-const defaultConfig = {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    }
-};
 
 const apiSettings = {
     fetchMovies: async (searchTerm, page) => {
@@ -36,13 +30,6 @@ const apiSettings = {
         return (await fetch(creditsEndpoint)).json();
     },
 
-
-
-
-    // getRequestToken: async () => {
-    //     const reqToken = await (await fetch(REQUEST_TOKEN_URL)).json();
-    //     return reqToken.request_token;
-    // },
     getRequestToken2: async () => {
         const reqTokenData = await axios.get(REQUEST_TOKEN_URL);
         return reqTokenData.data.request_token;
@@ -51,18 +38,9 @@ const apiSettings = {
         const bodyData = {
             username,
             password,
-            request_token: requestToken
+            request_token: 'test'
         };
         const data = await axios.post(LOGIN_URL, bodyData);
-        // if (data.data.success) {
-        //     const sessionId = await (
-        //         await fetch(SESSION_ID_URL, {
-        //             ...defaultConfig,
-        //             body: JSON.stringify({ request_token: requestToken })
-        //         })
-        //     ).json();
-        //     return sessionId;
-        // }
         if (data.data.success) {
             const sessionId =
                 await axios.post(SESSION_ID_URL, {

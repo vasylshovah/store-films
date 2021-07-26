@@ -9,8 +9,6 @@ import {Context} from "../../contextLogin/loginContext";
 
 const Header = () => {
     const [user] = useContext(Context)
-    console.log(user)
-
     return (
         <Wrapper>
             <Content>
@@ -24,6 +22,11 @@ const Header = () => {
                     {user ? (
                         <span style={{color: '#47C0C5'}}>Logged in as: {user.username}</span>
                     ): <Login />}
+                </div>
+                <div>
+                    <Link to='profile'>
+                        <span style={{color: '#47C0C5'}}>Open profile</span>
+                    </Link>
                 </div>
             </Content>
 

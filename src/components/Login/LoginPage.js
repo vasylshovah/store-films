@@ -2,22 +2,22 @@ import React, {useState, useContext} from "react";
 import {useHistory} from 'react-router-dom'
 import API from "../../API";
 import {Context} from "../../contextLogin/loginContext";
-import {Avatar, Button, Grid, Paper, TextField} from "@material-ui/core";
+import {Avatar, Button, Grid, Paper, TextField, FormControlLabel, Checkbox} from "@material-ui/core";
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 
-const paperStyle = {padding:20,height:'45vh',width:380,margin:'20px auto'}
+const paperStyle = {padding:20,height:'50vh',width:380,margin:'20px auto'}
 const avatarStyle = {backgroundColor:'#47C0C5'}
-const loginButtonBack = {backgroundColor:'#47C0C5',marginTop:'40px'}
+const loginButtonBack = {backgroundColor:'#47C0C5',marginTop:'30px'}
 
-const LoginPage = () => {
+const LoginPage = ({setIsAuth}) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(false)
 
     // eslint-disable-next-line
     const [_user, setUser] = useContext(Context)
-    const navigate = useHistory()
+    let navigate = useHistory()
 
     const handleSubmit = async () => {
         setError(false)
@@ -28,10 +28,13 @@ const LoginPage = () => {
                 username,
                 password
             )
-            console.log(sessionId)
 
             setUser({sessionId: sessionId.session_id, username})
-            navigate.push('/')
+            setIsAuth(true)
+            localStorage.setItem('isAuth', 'true')
+            localStorage.setItem('user', JSON.stringify( {sessionId: sessionId.session_id, username}))
+            navigate.push('/profile')
+
         } catch (error) {
             setError(true)
         }
@@ -71,7 +74,17 @@ const LoginPage = () => {
                         placeholder='Enter Password'
                         type='password'
                         fullWidth />
+                    <FormControlLabel style={{marginTop: '15px'}}
+                                      control={
+                                          <Checkbox
+                                              name="checkedB"
+                                              color="primary"
+                                          />
+                                      }
+                                      label="Remember me"
+                    />
                 </form>
+
 
                 <Button
                     onClick={handleSubmit}

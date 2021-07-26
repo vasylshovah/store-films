@@ -3,7 +3,7 @@ import React, {useState, createContext} from "react";
 export const Context = createContext()
 
 const UserProvider = ({children}) => {
-    const [state, setState] = useState(undefined)
+    const [state, setState] = useState(JSON.parse(localStorage.getItem('user')))
 
     return (
         <Context.Provider value={[state, setState]}>
