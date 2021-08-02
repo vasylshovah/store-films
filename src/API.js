@@ -9,6 +9,12 @@ import {
     SESSION_ID_URL
 } from './config';
 
+const defaultConfig = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+};
 
 const apiSettings = {
     fetchMovies: async (searchTerm, page) => {
@@ -38,15 +44,16 @@ const apiSettings = {
         const bodyData = {
             username,
             password,
-            request_token: 'test'
+            request_token: requestToken
         };
         const data = await axios.post(LOGIN_URL, bodyData);
         if (data.data.success) {
-            const sessionId =
-                await axios.post(SESSION_ID_URL, {
+            const sessionId = await (
+                await fetch(SESSION_ID_URL, {
+                    ...defaultConfig,
                     body: JSON.stringify({ request_token: requestToken })
                 }
-            )
+            )).json()
             return sessionId;
         }
     }
