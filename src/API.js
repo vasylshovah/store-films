@@ -56,6 +56,13 @@ const apiSettings = {
             )).json()
             return sessionId;
         }
+    },
+    rateMovie: async (sessionId, movieId, value) => {
+        const endpoint = `${API_URL}movie/${movieId}/rating?api_key=${API_KEY}&session_id=${sessionId}`;
+
+        const rating =
+            await axios.post(endpoint, {value})
+        return rating;
     }
 };
 

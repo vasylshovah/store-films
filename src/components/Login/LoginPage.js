@@ -39,13 +39,13 @@ const LoginPage = ({setIsAuth, alert}) => {
             )
             setUser({sessionId: sessionId.session_id, username})
             setIsAuth(true)
+
             localStorage.setItem('isAuth', 'true')
 
             localStorage.setItem('user', JSON.stringify( {sessionId: sessionId.session_id, username}))
             navigate.push('/profile')
         } catch (error) {
             dispatch(showAlert('test'))
-            console.log(error.message)
             setError(error.message)
         }
 
